@@ -4,13 +4,9 @@ import { AppDataSource } from "./data-source";
 import router from "./routes";
 import cors = require("cors");
 import "dotenv/config"
-import * as multer from "multer";
 
 AppDataSource.initialize()
     .then(async () => {
-
-        const upload = multer({ dest: "uploads/" });
-
         const app = express();
         const port = 5000;
 
@@ -28,11 +24,6 @@ AppDataSource.initialize()
 
         app.get("/", (req: Request, res: Response) => {
             res.send("Hello World!");
-        });
-        
-        app.post("/threads-new", upload.single("image"), (req, res) => {
-            const content = req.body.content;
-            const image = req.file;
         });
 
         app.listen(port, () => {

@@ -37,36 +37,36 @@ const UseThreads = () => {
     });
   };
 
-const handlePost = async () => {
-  try {
-    setIsLoading(true);
+  const handlePost = async () => {
+    try {
+      setIsLoading(true);
 
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setAuthToken(accessToken);
-    }
+      const accessToken = localStorage.getItem("accessToken");
+      if (accessToken) {
+        setAuthToken(accessToken);
+      }
 
-    const formData = new FormData();
+      const formData = new FormData();
     formData.append("content", form.content);
     if (form.image !== null) {
       formData.append("image", form.image);
     }
-    
-    const config = {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
 
-    const response = await APIConfig.post("/threads-new", formData, config);
-    console.log(response);
-    getThreads();
-  } catch (error) {
-    console.error("Error occurred:", error);
-  } finally {
-    setIsLoading(false);
-  }
-};
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await APIConfig.post("/threads-new", formData, config);
+      console.log(response);
+      getThreads();
+    } catch (error) {
+      console.error("Error occurred:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleContentClick = () => {
     if (contentInputRef.current) {
