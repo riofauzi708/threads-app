@@ -14,10 +14,10 @@ import { RootState } from "@/stores/types/rootState";
 
 const Home: React.FC = () => {
   const [profiles, setProfiles] = React.useState<IMyProfileCard[]>(DumyProfile);
-  const [suggested, setSuggested] = React.useState<ISuggestedForYouCard[]>(DumySuggested);
+  const [suggested, setSuggested] =
+    React.useState<ISuggestedForYouCard[]>(DumySuggested);
   const { threads, getThreads, isLoading } = UseThreads();
-  useSelector((state: RootState) => state.auth)
-
+  useSelector((state: RootState) => state.auth);
 
   React.useEffect(() => {
     getThreads();
@@ -28,46 +28,43 @@ const Home: React.FC = () => {
     setSuggested(DumySuggested);
   }, []);
 
+  console.log(threads);
+
   return (
     <Box bg="#242424" color="rgba(255, 255, 255, 0.87)" display="flex" gap={2}>
       <Navbar />
-        <Box display="flex" 
-        flexDirection="column" 
-        justifyContent="start" 
-        alignItems="start" 
-        gap={4} 
-        flex="1" 
-        w={"100%"} 
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="start"
+        alignItems="start"
+        gap={4}
+        flex="1"
+        w={"100%"}
         p={4}
-        >
-      <FormThread/>
-      <Box display="flex" flexDirection="column" gap={4}>
-      {!isLoading ? (
-  threads.map((data: IThreadCard, index: number) => (
-    <ThreadCard
-      key={index}
-      id={data.id}
-      author_picture={data.author_picture}
-      author_full_name={data.author_full_name}
-      author_username={data.author_username}
-      posted_at={data.posted_at}
-      content={data.content}
-      image={data.image}
-      likes_count={data.likes_count}
-      replies_count={data.replies_count}
-      iduser={data.iduser}
-    />
-  ))) : ( 
-        <Text 
-          textAlign="center"
-          position="relative"
-          w="100%"
-          fontSize="2xl" 
-          fontWeight="bold" 
-          color="white"
-        >Wait a second...</Text>
-      )}
-    </Box>
+      >
+        <FormThread />
+        <Box display="flex" flexDirection="column" gap={4}>
+          {!isLoading ? (
+            threads.map((data: IThreadCard) => (
+              <ThreadCard
+                key={data.id}
+                {...data}
+              />
+            ))
+          ) : (
+            <Text
+              textAlign="center"
+              position="relative"
+              w="100%"
+              fontSize="2xl"
+              fontWeight="bold"
+              color="white"
+            >
+              Wait a second...
+            </Text>
+          )}
+        </Box>
       </Box>
       <Box flex="1" display="flex" flexDirection="column" gap={4}>
         {profiles.map((data: IMyProfileCard, index: number) => (

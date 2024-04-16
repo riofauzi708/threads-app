@@ -6,6 +6,7 @@ import { IThreadCard } from "@/utils/interface/IThreadCard";
 const ThreadCard: React.FC<IThreadCard> = (props) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<number>(props.likes_count);
+console.log(props);
 
   const handleLike = () => {
     if (isLiked) {
@@ -19,14 +20,14 @@ const ThreadCard: React.FC<IThreadCard> = (props) => {
   return (
     <Box bg="#242424" color="rgba(255, 255, 255, 0.87)" p={4} borderBottom="1px" borderRight={"1px"} borderColor="gray.700" width="118%">
       <Box display="flex" alignItems="start" justifyContent="space-between">
-        <Avatar src={props.author_picture} mr={4} />
+        <Avatar src={props.user?.profile_picture} mr={4} />
         <Box flex="1">
           <Box display="flex" alignItems="center">
             <Text fontWeight="bold" mr={2}>
-            rio fauzi{props.author_full_name}
+              {props.user?.full_name}
             </Text>
             <Text color="gray.500" fontSize="sm">
-              @rio{props.author_username}
+              @{props.user?.username}
             </Text>
             <Text fontSize="sm" color="gray.500" ml={2}>
               {props.posted_at}

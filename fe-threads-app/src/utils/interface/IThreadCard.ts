@@ -1,14 +1,15 @@
 export interface IThreadCard {
     id: number,
-    author_picture: string,
-    author_full_name: string,
-    author_username: string,
+    profile_picture: string,
+    full_name: string,
+    username: string,
     posted_at: string,
     content: string,
     image: string | null,
     likes_count: number,
     replies_count: number
     iduser: number
+    user: IUser
 }
 
 export interface IThreadPost {
@@ -19,7 +20,7 @@ export interface IThreadPost {
 
 export interface IUser {
     id: number;
-    picture: string;
+    profile_picture: string;
     full_name: string;
     username: string;
   }

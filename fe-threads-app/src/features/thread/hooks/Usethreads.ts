@@ -23,7 +23,7 @@ const UseThreads = () => {
       const sortedThreads = response.data.data.threads.sort((
         a: IThreadCard, b: IThreadCard) => b.id - a.id);
       setThreads(sortedThreads);
-  
+
       setIsLoading(false);
     } catch (error) {
       console.log(error);
